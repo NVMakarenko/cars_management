@@ -1,0 +1,33 @@
+---
+- :id: 1
+  :make: fiat
+  :model: doblo
+  :year: 2016
+  :odometer: 120000
+  :price: 8500
+  :description: first owner
+  :date_added: 31.10.2022
+- :id: 2
+  :make: ford
+  :model: fusion
+  :year: 2017
+  :odometer: 65000
+  :price: 6500
+  :description: good condition
+  :date_added: 18.09.2021
+- :id: 3
+  :make: fiat
+  :model: combo
+  :year: 2022
+  :odometer: 10000
+  :price: 13000
+  :description: new auto
+  :date_added: 30.09.2022
+- :id: 4
+  :make: ford
+  :model: fusion
+  :year: 2018
+  :odometer: 100000
+  :price: 8500
+  :description: second owner
+  :date_added: 18.09.2018
