@@ -16,7 +16,7 @@ end
 def search_make(list)
   print 'Please choose make: '
   make = gets.chomp.downcase
-  result = list.select { |car| car.make == make }
+  result = list.select { |car| car.make.downcase == make }
   return list if result == []
 
   result
@@ -25,7 +25,7 @@ end
 def search_model(list)
   print 'Please choose model: '
   model = gets.chomp.downcase
-  result = list.select { |car| car.model == model }
+  result = list.select { |car| car.model.downcase == model }
   return list if result == []
 
   result
