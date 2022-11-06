@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Car
+  require 'date'
   attr_accessor :id, :make, :model, :year, :odometer, :price, :description, :date_added
 
   def initialize(id, make, model, year, odometer, price, description, date_added)
@@ -11,7 +12,7 @@ class Car
     @odometer = odometer
     @price = price
     @description = description
-    @date_added = date_added
+    @date_added = Date.strptime(date_added, '%d/%m/%y')
   end
 
   def to_hash

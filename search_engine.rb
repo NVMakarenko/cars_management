@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'yaml'
+require 'date'
 require_relative 'car'
 
 def init_cars_list
@@ -89,7 +90,7 @@ def sort(list)
   print 'Please choose sort direction(desc|asc): '
   direction = gets.chomp.downcase
   return sort_price(list, direction) if sort_option == 'price'
-  return list.sort_by!(&:date_added).reverse if direction != 'asc'
+  return list.sort_by!(&:date_added).reverse unless direction == 'asc'
 
   list.sort_by!(&:date_added)
 end
@@ -105,7 +106,8 @@ def output(result)
   puts 'Result: (if there are no proper car, we will advice you something else)'
   result.each do |car|
     car.to_hash.each do |key, value|
-      puts "#{key.capitalize}: #{value}"
+      puts "#{key.capitalize}: #{value}" unless key=='date_added'
+      puts "#{key.capitalize}: #{value.strftime('%d/%m/%Y')}" if key=='date_added'
     end
     puts
   end
