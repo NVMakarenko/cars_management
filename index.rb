@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
+require_relative 'search_engine'
+include SearchRule
 old_sync = $stdout.sync # cache old value
 $stdout.sync = true # set mode to true
-require_relative 'search_engine'
 
 puts 'Please select search rules.'
 
