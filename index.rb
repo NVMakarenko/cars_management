@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'search_engine'
+require_relative 'search_rule'
 include SearchRule
 old_sync = $stdout.sync # cache old value
 $stdout.sync = true # set mode to true

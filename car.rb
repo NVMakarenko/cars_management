@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
+require 'date'
+
 class Car
-  require 'date'
   attr_accessor :id, :make, :model, :year, :odometer, :price, :description, :date_added
 
   def initialize(id, make, model, year, odometer, price, description, date_added)

@@ -1,25 +1,23 @@
 # frozen_string_literal: true
 
-module SearchRule
-  require 'yaml'
-  require 'date'
-  require_relative 'car'
+require 'yaml'
+require 'date'
+require_relative 'car'
 
+module SearchRule
   def init_cars_list
-    list_of_objects = []
     cars_list = YAML.load_file('db/db.yml')
-    cars_list.each do |car|
-      list_of_objects.push(Car.new(car[:id], car[:make], car[:model], car[:year], car[:odometer], car[:price],
-                                   car[:description], car[:date_added]))
+    cars_list.map do |car|
+      Car.new(car[:id], car[:make], car[:model], car[:year], car[:odometer], car[:price],
+              car[:description], car[:date_added])
     end
-    list_of_objects
   end
 
   def search_make(list)
     print 'Please choose make: '
     make = gets.chomp.downcase
     result = list.select { |car| car.make.downcase == make }
-    return list if result == []
+    return list if result.empty?
 
     result
   end
@@ -28,19 +26,18 @@ module SearchRule
     print 'Please choose model: '
     model = gets.chomp.downcase
     result = list.select { |car| car.model.downcase == model }
-    return list if result == []
+    return list if result.empty?
 
     result
   end
 
   def search_year(list)
     print 'Please choose year_from: '
-    year_from = gets.chomp.downcase.to_i
+    year_from = gets.chomp.to_i
     print 'Please choose year_to: '
-    year_to = gets.chomp.downcase.to_i
-    result = show_year_from_zero(list, year_to) if year_from.zero?
-    result = show_year_to_now(list, year_from, year_to) unless year_from.zero?
-    result
+    year_to = gets.chomp.to_i
+    return show_year_from_zero(list, year_to) if year_from.zero?
+    return show_year_to_now(list, year_from, year_to) unless year_from.zero?
   end
 
   def show_year_from_zero(list, year_to)
@@ -59,12 +56,11 @@ module SearchRule
 
   def search_price(list)
     print 'Please choose price_from: '
-    price_from = gets.chomp.downcase.to_i
+    price_from = gets.chomp.to_i
     print 'Please choose price_to: '
-    price_to = gets.chomp.downcase.to_i
-    result = show_price_from(list, price_to) if price_from.zero?
-    result = show_price_to_limit(list, price_from, price_to) unless price_from.zero?
-    result
+    price_to = gets.chomp.to_i
+    return show_price_from(list, price_to) if price_from.zero?
+    return show_price_to_limit(list, price_from, price_to) unless price_from.zero?
   end
 
   def show_price_from(list, price_to)
