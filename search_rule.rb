@@ -3,6 +3,7 @@
 require 'yaml'
 require 'date'
 require_relative 'car'
+require_relative 'request_quantity'
 
 module SearchRule
   def init_cars_list
@@ -16,6 +17,7 @@ module SearchRule
   def search_make(list)
     print 'Please choose make: '
     make = gets.chomp.downcase
+    @current_request = RequestQuantity.new(make)
     result = list.select { |car| car.make.downcase == make }
     return list if result.empty?
 
@@ -25,6 +27,7 @@ module SearchRule
   def search_model(list)
     print 'Please choose model: '
     model = gets.chomp.downcase
+    @current_request.model = model
     result = list.select { |car| car.model.downcase == model }
     return list if result.empty?
 
@@ -34,8 +37,10 @@ module SearchRule
   def search_year(list)
     print 'Please choose year_from: '
     year_from = gets.chomp.to_i
+    @current_request.year_from = year_from
     print 'Please choose year_to: '
     year_to = gets.chomp.to_i
+    @current_request.year_to = year_to
     return show_year_from_zero(list, year_to) if year_from.zero?
     return show_year_to_now(list, year_from, year_to) unless year_from.zero?
   end
@@ -57,8 +62,10 @@ module SearchRule
   def search_price(list)
     print 'Please choose price_from: '
     price_from = gets.chomp.to_i
+    @current_request.price_from = price_from
     print 'Please choose price_to: '
     price_to = gets.chomp.to_i
+    @current_request.price_to = price_to
     return show_price_from(list, price_to) if price_from.zero?
     return show_price_to_limit(list, price_from, price_to) unless price_from.zero?
   end
@@ -98,6 +105,30 @@ module SearchRule
     list.sort_by!(&:price).reverse
   end
 
+  def statistic(result)
+    puts '----------------------------------'
+    puts 'Statistic'
+    @current_request.total_quantity = result.size
+    puts "Total Quantity: #{@current_request.total_quantity}"
+    request_list = YAML.safe_load(File.open('db/request.yml'), permitted_classes: [RequestQuantity])
+    catch_uniq_request(request_list)
+    File.open('db/request.yml', 'rb+') { |file| file.write(request_list.to_yaml) }
+  end
+
+  def catch_uniq_request(request_list)
+    catch :request_uniq do
+      request_list.each do |request|
+        if request == (@current_request)
+          (request.request_quantity += 1) &&
+            (puts "Request Quantity: #{request.request_quantity}")
+        end
+        throw :request_uniq if request == (@current_request)
+      end
+      request_list.push(@current_request)
+      puts "Request Quantity: #{@current_request.request_quantity}"
+    end
+  end
+  
   def output(result)
     puts '----------------------------------'
     puts 'Result: (if there are no proper car, we will advice you something else)'
@@ -108,5 +139,6 @@ module SearchRule
       end
       puts
     end
+    statistic(result)
   end
 end
