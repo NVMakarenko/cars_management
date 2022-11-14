@@ -6,14 +6,14 @@ class Car
   attr_accessor :id, :make, :model, :year, :odometer, :price, :description, :date_added
 
   def initialize(id, make, model, year, odometer, price, description, date_added)
-    @id = id
-    @make = make
-    @model = model
-    @year = year
-    @odometer = odometer
-    @price = price
-    @description = description
-    @date_added = Date.strptime(date_added, '%d/%m/%y')
+    self.id = id
+    self.make = make
+    self.model = model
+    self.year = year
+    self.odometer = odometer
+    self.price = price
+    self.description = description
+    self.date_added = Date.strptime(date_added, '%d/%m/%y')
   end
 
   def to_hash

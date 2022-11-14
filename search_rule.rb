@@ -42,7 +42,7 @@ module SearchRule
     year_to = gets.chomp.to_i
     @current_request.year_to = year_to
     return show_year_from_zero(list, year_to) if year_from.zero?
-    return show_year_to_now(list, year_from, year_to) unless year_from.zero?
+    return show_year_to_now(list, year_from.to_i, year_to) unless year_from.zero?
   end
 
   def show_year_from_zero(list, year_to)
@@ -128,7 +128,7 @@ module SearchRule
       puts "Request Quantity: #{@current_request.request_quantity}"
     end
   end
-  
+
   def output(result)
     puts '----------------------------------'
     puts 'Result: (if there are no proper car, we will advice you something else)'
