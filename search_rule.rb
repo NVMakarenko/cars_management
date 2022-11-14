@@ -17,7 +17,8 @@ module SearchRule
   def search_make(list)
     print 'Please choose make: '
     make = gets.chomp.downcase
-    @current_request = RequestQuantity.new(make)
+    @current_request = RequestQuantity.new(make) if make !=''
+    @current_request = RequestQuantity.new unless make !=''
     result = list.select { |car| car.make.downcase == make }
     return list if result.empty?
 
@@ -27,7 +28,7 @@ module SearchRule
   def search_model(list)
     print 'Please choose model: '
     model = gets.chomp.downcase
-    @current_request.model = model
+    @current_request.model = model if model !=''
     result = list.select { |car| car.model.downcase == model }
     return list if result.empty?
 
@@ -37,10 +38,10 @@ module SearchRule
   def search_year(list)
     print 'Please choose year_from: '
     year_from = gets.chomp.to_i
-    @current_request.year_from = year_from
+    @current_request.year_from = year_from if year_from != 0
     print 'Please choose year_to: '
     year_to = gets.chomp.to_i
-    @current_request.year_to = year_to
+    @current_request.year_to = year_to if year_to != 0
     return show_year_from_zero(list, year_to) if year_from.zero?
     return show_year_to_now(list, year_from.to_i, year_to) unless year_from.zero?
   end
@@ -62,10 +63,10 @@ module SearchRule
   def search_price(list)
     print 'Please choose price_from: '
     price_from = gets.chomp.to_i
-    @current_request.price_from = price_from
+    @current_request.price_from = price_from if price_from != 0
     print 'Please choose price_to: '
     price_to = gets.chomp.to_i
-    @current_request.price_to = price_to
+    @current_request.price_to = price_to if price_to !=0
     return show_price_from(list, price_to) if price_from.zero?
     return show_price_to_limit(list, price_from, price_to) unless price_from.zero?
   end

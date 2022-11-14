@@ -3,7 +3,7 @@
 class RequestQuantity
   attr_accessor :make, :model, :year_from, :year_to, :price_from, :price_to, :total_quantity, :request_quantity
 
-  def initialize(make = '', model = '', year_from = nil, year_to = 0, price_from = 0, price_to = 0, total_quantity = 0, request_quantity = 1)
+  def initialize(make = nil, model = nil, year_from = nil, year_to = nil, price_from = nil, price_to = nil, total_quantity = 0, request_quantity = 1)
     self.make = make
     self.model = model
     self.year_from = year_from

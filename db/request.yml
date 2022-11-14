@@ -1,19 +1,19 @@
 ---
 - !ruby/object:RequestQuantity
-  make: ford
-  model: ''
-  year_from: 0
-  year_to: 0
-  price_from: 0
-  price_to: 0
-  total_quantity: 2
-  request_quantity: 12
+  make:
+  model:
+  year_from:
+  year_to:
+  price_from:
+  price_to:
+  total_quantity: 14
+  request_quantity: 1
 - !ruby/object:RequestQuantity
-  make: fird
-  model: focus
-  year_from: 0
-  year_to: 0
-  price_from: 0
-  price_to: 0
-  total_quantity: 1
+  make: ford
+  model:
+  year_from:
+  year_to:
+  price_from:
+  price_to:
+  total_quantity: 2
   request_quantity: 1
