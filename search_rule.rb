@@ -3,11 +3,12 @@
 require 'yaml'
 require 'date'
 require_relative 'car'
-require_relative 'request_quantity'
+require_relative 'request'
 require_relative 'statistic'
 include Statistic
 
 module SearchRule
+
   def init_cars_list
     cars_list = YAML.load_file('db/db.yml')
     cars_list.map do |car|
@@ -16,42 +17,33 @@ module SearchRule
     end
   end
 
-  def search_make(list)
-    print 'Please choose make: '
-    make = gets.chomp.downcase
-    @current_request = RequestQuantity.new(make) if make != ''
-    @current_request = RequestQuantity.new unless make != ''
-    result = list.select { |car| car.make.downcase == make }
+  def search_make(list, request)
+    result = list.select { |car| car.make.downcase == request.make }
     return list if result.empty?
 
     result
   end
 
-  def search_model(list)
-    print 'Please choose model: '
-    model = gets.chomp.downcase
-    @current_request.model = model if model != ''
-    result = list.select { |car| car.model.downcase == model }
+  def search_model(list, request)
+    result = list.select { |car| car.model.downcase == request.model }
     return list if result.empty?
 
     result
   end
 
-  def search_year(list)
-    print 'Please choose year_from: '
-    year_from = gets.chomp.to_i
-    @current_request.year_from = year_from if year_from != 0
-    print 'Please choose year_to: '
-    year_to = gets.chomp.to_i
-    @current_request.year_to = year_to if year_to != 0
-    return show_year_from_zero(list, year_to) if year_from.zero?
-    return show_year_to_now(list, year_from.to_i, year_to) unless year_from.zero?
+  def search_year(list,request)
+    return show_year_from_zero(list, request.year_to) if request.year_from.to_i.zero?
+    return show_year_to_now(list, request.year_from, request.year_to) unless request.year_from.to_i.zero?
+  end
+  def search_price(list,request)
+    return show_price_from(list, request.price_to) if request.price_from.to_i.zero?
+    return show_price_to_limit(list, request.price_from, request.price_to) unless request.price_from.to_i.zero?
   end
 
   def show_year_from_zero(list, year_to)
-    return list if year_to.zero?
+    return list if year_to.to_i.zero?
 
-    list.select { |car| car.year.to_i <= year_to }
+    list.select { |car| car.year.to_i <= year_to.to_i }
   end
 
   def show_year_to_now(list, year_from, year_to)
@@ -62,33 +54,22 @@ module SearchRule
     end
   end
 
-  def search_price(list)
-    print 'Please choose price_from: '
-    price_from = gets.chomp.to_i
-    @current_request.price_from = price_from if price_from != 0
-    print 'Please choose price_to: '
-    price_to = gets.chomp.to_i
-    @current_request.price_to = price_to if price_to != 0
-    return show_price_from(list, price_to) if price_from.zero?
-    return show_price_to_limit(list, price_from, price_to) unless price_from.zero?
-  end
-
   def show_price_from(list, price_to)
-    return list if price_to.zero?
+    return list if price_to.to_i.zero?
 
     list.select { |car| car.price.to_i <= price_to }
   end
 
   def show_price_to_limit(list, price_from, price_to)
-    return list.select { |car| car.price.to_i >= price_from } if price_to.zero?
+    return list.select { |car| car.price.to_i >= price_from } if price_to.to_i.zero?
 
     list.select do |car|
       car.price.to_i >= price_from && car.price.to_i <= price_to
     end
   end
 
-  def filter(list)
-    search_price(search_year(search_model(search_make(list))))
+  def filter(list, request)
+    search_price(search_year(search_model(search_make(list, request),request),request),request)
   end
 
   def sort(list)
@@ -118,6 +99,5 @@ module SearchRule
       end
       puts
     end
-    statistic(result)
   end
 end
