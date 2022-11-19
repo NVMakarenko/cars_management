@@ -6,9 +6,9 @@ module Statistic
     puts 'Statistic'
     current_request.total_quantity = result.size
     puts "Total Quantity: #{current_request.total_quantity}"
-    request_list = YAML.safe_load(File.open('db/request.yml'), permitted_classes: [Request])
+    request_list = YAML.safe_load(File.open('db/request_history.yml'), permitted_classes: [Request])
     catch_uniq_request(request_list, current_request)
-    File.open('db/request.yml', 'rb+') { |file| file.write(request_list.to_yaml) }
+    File.open('db/request_history.yml', 'rb+') { |file| file.write(request_list.to_yaml) }
   end
 
   def catch_uniq_request(request_list, current_request)

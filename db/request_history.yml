@@ -7,7 +7,7 @@
   price_from:
   price_to:
   total_quantity: 14
-  request_quantity: 1
+  request_quantity: 2
 - !ruby/object:Request
   make: ford
   model:
@@ -20,9 +20,9 @@
 - !ruby/object:Request
   make: bmw
   model: x5
-  year_from: 2018
-  year_to: 2022
-  price_from: 10000
-  price_to: 15000
-  total_quantity: 0
+  year_from: 2000
+  year_to: 2005
+  price_from: 2000
+  price_to: 20000
+  total_quantity: 1
   request_quantity: 1
