@@ -16,12 +16,12 @@ class Request
     price_from = gets.chomp.to_i
     print 'Please choose price_to: '
     price_to = gets.chomp.to_i
-    self.make = make if make != ''
-    self.model = model if model != ''
-    self.year_from = year_from if year_from !=0
-    self.year_to = year_to if year_to !=0
-    self.price_from = price_from if price_from != 0
-    self.price_to = price_to if price_to != 0
+    self.make = make unless make.empty?
+    self.model = model unless model.empty?
+    self.year_from = year_from unless year_from.zero?
+    self.year_to = year_to unless year_to.zero?
+    self.price_from = price_from unless price_from.zero?
+    self.price_to = price_to unless price_to.zero?
     self.total_quantity = total_quantity
     self.request_quantity = request_quantity
   end
