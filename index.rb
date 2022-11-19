@@ -9,5 +9,6 @@ puts 'Please select search rules.'
 request = Request.new
 search_result = sort(filter(init_cars_list, request))
 output(search_result)
-statistic(search_result, request)
+Statistic.new(search_result, request, 'db/request_history.yml').call
+
 $stdout.sync = old_sync # restore old value

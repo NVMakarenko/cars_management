@@ -5,10 +5,8 @@ require 'date'
 require_relative 'car'
 require_relative 'request'
 require_relative 'statistic'
-include Statistic
 
 module SearchRule
-
   def init_cars_list
     cars_list = YAML.load_file('db/db.yml')
     cars_list.map do |car|
@@ -31,11 +29,12 @@ module SearchRule
     result
   end
 
-  def search_year(list,request)
+  def search_year(list, request)
     return show_year_from_zero(list, request.year_to) if request.year_from.to_i.zero?
     return show_year_to_now(list, request.year_from, request.year_to) unless request.year_from.to_i.zero?
   end
-  def search_price(list,request)
+
+  def search_price(list, request)
     return show_price_from(list, request.price_to) if request.price_from.to_i.zero?
     return show_price_to_limit(list, request.price_from, request.price_to) unless request.price_from.to_i.zero?
   end
@@ -69,7 +68,7 @@ module SearchRule
   end
 
   def filter(list, request)
-    search_price(search_year(search_model(search_make(list, request),request),request),request)
+    search_price(search_year(search_model(search_make(list, request), request), request), request)
   end
 
   def sort(list)
