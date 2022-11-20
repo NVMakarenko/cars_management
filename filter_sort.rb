@@ -13,7 +13,7 @@ class FilterSort
   end
 
   def call
-    search_result = filter(@cars_list)
+    search_result = filter
     sorted_result = sort(search_result)
     output(sorted_result)
   end
@@ -80,8 +80,8 @@ class FilterSort
     end
   end
 
-  def filter(list)
-    search_price(search_year(search_model(search_make(list))))
+  def filter
+    search_price(search_year(search_model(search_make(@cars_list))))
   end
 
   def sort(list)
