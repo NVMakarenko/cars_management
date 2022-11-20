@@ -5,15 +5,15 @@ require 'date'
 class Car
   attr_reader :id, :make, :model, :year, :odometer, :price, :description, :date_added
 
-  def initialize(id, make, model, year, odometer, price, description, date_added)
-    @id = id
-    @make = make
-    @model = model
-    @year = year
-    @odometer = odometer
-    @price = price
-    @description = description
-    @date_added = Date.strptime(date_added, '%d/%m/%y')
+  def initialize(params = {})
+    @id = params[:id]
+    @make = params[:make]
+    @model = params[:model]
+    @year = params[:year]
+    @odometer = params[:odometer]
+    @price = params[:price]
+    @description = params[:description]
+    @date_added = Date.strptime(params[:date_added], '%d/%m/%y')
   end
 
   def to_hash

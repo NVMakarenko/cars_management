@@ -22,66 +22,66 @@ class FilterSort
 
   def init_cars_list(cars_db)
     cars_list = YAML.load_file(cars_db)
-    cars_list.map do |car|
-      Car.new(car[:id], car[:make], car[:model], car[:year], car[:odometer], car[:price],
-              car[:description], car[:date_added])
-    end
+    cars_list.map { |car| Car.new(car) }
   end
 
-  def search_make(list)
-    result = list.select { |car| car.make.downcase == @request.make }
-    return list if result.empty?
+  def search_make
+    result = @cars_list.select { |car| car.make.downcase == @request.make }
+    return @cars_list if result.empty?
 
-    result
+    @cars_list = result
   end
 
-  def search_model(list)
-    result = list.select { |car| car.model.downcase == @request.model }
-    return list if result.empty?
+  def search_model
+    result = @cars_list.select { |car| car.model.downcase == @request.model }
+    return @cars_list if result.empty?
 
-    result
+    @cars_list = result
   end
 
-  def search_year(list)
-    return show_year_from_zero(list, @request.year_to) if @request.year_from.to_i.zero?
-    return show_year_to_now(list, @request.year_from, @request.year_to) unless @request.year_from.to_i.zero?
+  def search_year
+    return show_year_from_zero(@request.year_to) if @request.year_from.to_i.zero?
+    return show_year_to_now(@request.year_from, @request.year_to) unless @request.year_from.to_i.zero?
   end
 
-  def search_price(list)
-    return show_price_from(list, @request.price_to) if @request.price_from.to_i.zero?
-    return show_price_to_limit(list, @request.price_from, @request.price_to) unless @request.price_from.to_i.zero?
+  def search_price
+    return show_price_from(@request.price_to) if @request.price_from.to_i.zero?
+    return show_price_to_limit(@request.price_from, @request.price_to) unless @request.price_from.to_i.zero?
   end
 
-  def show_year_from_zero(list, year_to)
-    return list if year_to.to_i.zero?
+  def show_year_from_zero(year_to)
+    return @cars_list if year_to.to_i.zero?
 
-    list.select { |car| car.year.to_i <= year_to.to_i }
+    @cars_list.select { |car| car.year.to_i <= year_to.to_i }
   end
 
-  def show_year_to_now(list, year_from, year_to)
-    return list.select { |car| car.year.to_i >= year_from } if year_to.zero?
+  def show_year_to_now(year_from, year_to)
+    return @cars_list.select { |car| car.year.to_i >= year_from } if year_to.zero?
 
-    list.select do |car|
+    @cars_list.select do |car|
       car.year.to_i >= year_from && car.year.to_i <= year_to
     end
   end
 
-  def show_price_from(list, price_to)
-    return list if price_to.to_i.zero?
+  def show_price_from(price_to)
+    return @cars_list if price_to.to_i.zero?
 
-    list.select { |car| car.price.to_i <= price_to }
+    @cars_list.select { |car| car.price.to_i <= price_to }
   end
 
-  def show_price_to_limit(list, price_from, price_to)
-    return list.select { |car| car.price.to_i >= price_from } if price_to.to_i.zero?
+  def show_price_to_limit(price_from, price_to)
+    return @cars_list.select { |car| car.price.to_i >= price_from } if price_to.to_i.zero?
 
-    list.select do |car|
+    @cars_list.select do |car|
       car.price.to_i >= price_from && car.price.to_i <= price_to
     end
   end
 
   def filter
-    search_price(search_year(search_model(search_make(@cars_list))))
+    search_make
+    search_model
+    search_year
+    search_price
   end
 
   def sort(list)
