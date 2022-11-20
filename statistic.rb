@@ -26,6 +26,7 @@ class Statistic
       @request_list.each do |request|
         if request == (@current_request)
           (request.request_quantity += 1)
+          request.total_quantity = @search_result.size
           @current_request.request_quantity = request.request_quantity
         end
         throw :request_uniq if request == (@current_request)

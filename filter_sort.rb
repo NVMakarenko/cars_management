@@ -56,7 +56,7 @@ class FilterSort
   end
 
   def show_year_to_now(year_from, year_to)
-    return @cars_list.select { |car| car.year.to_i >= year_from } if year_to.zero?
+    return @cars_list.select { |car| car.year.to_i >= year_from } if year_to.to_i.zero?
 
     @cars_list.select do |car|
       car.year.to_i >= year_from && car.year.to_i <= year_to
