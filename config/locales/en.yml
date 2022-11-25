@@ -1,0 +1,27 @@
+en:
+  index:
+    language: "Please, choose language / "
+    select_search_rules: "Please select search rules."
+  statistic:
+    table_header: "Statistic"
+    total_quantity: "Total Quantity: "
+    request_quantity: "Request Quantity: "
+  request:
+    make: "Please choose make: "
+    model: "Please choose model: "
+    year_from: "Please choose year_from: "
+    year_to: "Please choose year_to: "
+    price_from: "Please choose price_from: "
+    price_to: "Please choose price_from: "
+  sort:
+    id: "Id:"
+    make: "Make:"
+    model: "Model:"
+    year: "Year:"
+    odometer: "Odometer:"
+    price: "Price:"
+    description: "Description:"
+    table_header: "Search Results"
+    date_added: "Date added:"
+    option: "Please choose sort option (date_added|price): "
+    direction: "Please choose sort direction(desc|asc): "

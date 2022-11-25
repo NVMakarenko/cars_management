@@ -34,31 +34,39 @@ class Request
   end
 
   def set_instance_char(params = {})
-    print 'Please choose make: '
+    print I18n.t('request.make').blue
     params[:make] = gets.chomp.downcase
-    print 'Please choose model: '
-    params[:model] = gets.chomp.downcase
     @make = params[:make] unless params[:make].empty?
+    set_instance_model
+  end
+
+  def set_instance_model(params = {})
+    print I18n.t('request.model').blue
+    params[:model] = gets.chomp.downcase
     @model = params[:model] unless params[:model].empty?
   end
 
   def set_instance_year(params = {})
-    print 'Please choose year_from: '
+    print I18n.t('request.year_from').blue
     params[:year_from] = gets.chomp.to_i
-    print 'Please choose year_to: '
-    params[:year_to] = gets.chomp.to_i
     @year_from = params[:year_from] unless params[:year_from].zero?
+    set_instance_year_to
+  end
+
+  def set_instance_year_to(params = {})
+    print I18n.t('request.year_to').blue
+    params[:year_to] = gets.chomp.to_i
     @year_to = params[:year_to] unless params[:year_to].zero?
   end
 
   def set_instance_price_from(params = {})
-    print 'Please choose price_from: '
+    print I18n.t('request.price_from').blue
     params[:price_from] = gets.chomp.to_i
     @price_from = params[:price_from] unless params[:price_from].zero?
   end
 
   def set_instance_price_to(params = {})
-    print 'Please choose price_to: '
+    print I18n.t('request.price_to').blue
     params[:price_to] = gets.chomp.to_i
     @price_to = params[:price_to] unless params[:price_to].zero?
   end

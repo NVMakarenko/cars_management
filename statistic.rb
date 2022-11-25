@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'terminal-table'
 require_relative 'request'
 
 class Statistic
@@ -17,6 +18,7 @@ class Statistic
   private
 
   def update_request_db
+    @current_request.total_quantity = @search_result.size
     validate_uniq_request
     File.open('db/request_history.yml', 'w+') { |file| file.write(@request_list.to_yaml) }
   end
@@ -26,7 +28,6 @@ class Statistic
       @request_list.each do |request|
         if request == (@current_request)
           (request.request_quantity += 1)
-          request.total_quantity = @search_result.size
           @current_request.request_quantity = request.request_quantity
         end
         throw :request_uniq if request == (@current_request)
@@ -36,10 +37,10 @@ class Statistic
   end
 
   def display_statistic
-    puts '----------------------------------'
-    puts 'Statistic'
-    @current_request.total_quantity = @search_result.size
-    puts "Total Quantity: #{@current_request.total_quantity}"
-    puts "Request Quantity: #{@current_request.request_quantity}"
+    table = Terminal::Table.new title: I18n.t('statistic.table_header').black.on_green do |t|
+      t << [I18n.t('statistic.total_quantity').green, @current_request.total_quantity.to_s]
+      t << [I18n.t('statistic.request_quantity').green, @current_request.request_quantity.to_s]
+    end
+    puts table
   end
 end
