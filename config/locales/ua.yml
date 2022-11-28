@@ -1,0 +1,27 @@
+ua:
+  index:
+    language: "Будь ласка, оберіть мову: en / ua "
+    select_search_rules: "Оберіть пошукові правила, будь ласка."
+  statistic:
+    table_header: "Пошукова статистика"
+    total_quantity: "Кількість знайдених авто: "
+    request_quantity: "Кількість запитів: "
+  request:
+    make: "Оберіть марку: "
+    model: "Оберіть модель: "
+    year_from: "Оберіть рік випуску ВІД: "
+    year_to: "Оберіть рік випуску ДО: "
+    price_from: "Оберіть ціну ВІД: "
+    price_to: "Оберіть ціну ДО: "
+  sort:
+    id: "Id:"
+    make: "Марка:"
+    model: "Модель:"
+    year: "Рік випуску:"
+    odometer: "Пробіг:"
+    price: "Ціна:"
+    description: "Опис:"
+    table_header: "Результат пошуків"
+    date_added: "Дата додавання:"
+    option: "Оберіть параметр, за яким відбудеться сортування (date_added|price): "
+    direction: "Оберіть напрямок, за яким відбудеться сортування (desc|asc): "

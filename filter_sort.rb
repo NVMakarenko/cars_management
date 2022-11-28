@@ -2,6 +2,8 @@
 
 require 'yaml'
 require 'date'
+require 'terminal-table'
+require 'i18n'
 require_relative 'car'
 require_relative 'request'
 require_relative 'statistic'
@@ -16,6 +18,7 @@ class FilterSort
     search_result = filter
     sorted_result = sort(search_result)
     output(sorted_result)
+    sorted_result
   end
 
   private
@@ -85,9 +88,9 @@ class FilterSort
   end
 
   def sort(list)
-    print 'Please choose sort option (date_added|price): '
+    print I18n.t('sort.option').yellow
     sort_option = gets.chomp.downcase
-    print 'Please choose sort direction(desc|asc): '
+    print I18n.t('sort.direction').yellow
     direction = gets.chomp.downcase
     return sort_price(list, direction) if sort_option == 'price'
     return list.sort_by!(&:date_added).reverse unless direction == 'asc'
@@ -102,14 +105,23 @@ class FilterSort
   end
 
   def output(result)
-    puts '----------------------------------'
-    puts 'Result: (if there are no proper car, we will advice you something else)'
+    table = Terminal::Table.new title: I18n.t('sort.table_header').black.on_green do |row|
+      list_objects_into_table(result, row)
+    end
+    puts table
+  end
+
+  def list_objects_into_table(result, row)
     result.each do |car|
       car.to_hash.each do |key, value|
-        puts "#{key.capitalize}: #{value}" unless key == 'date_added'
-        puts "#{key.capitalize}: #{value.strftime('%d/%m/%Y')}" if key == 'date_added'
+        row << [table_key(key), value.to_s] unless key == 'date_added'
+        row << [I18n.t('sort.date_added').green, value.strftime('%d/%m/%Y').to_s] if key == 'date_added'
       end
-      puts
+      row << :separator
     end
+  end
+
+  def table_key(key)
+    I18n.t('sort').map { |k, v| v if k.to_s == key }.reject(&:nil?).first.green
   end
 end
