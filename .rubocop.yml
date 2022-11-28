@@ -6,6 +6,8 @@ require:
 AllCops:
   TargetRubyVersion: 3.0
   NewCops: enable
+  Exclude:
+  - 'vendor/'
 
 Lint/MissingSuper:
   Enabled: false
