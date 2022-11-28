@@ -7,17 +7,7 @@ on:
     branches: [ "main" ]
     
 jobs:
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.0' # Not needed with a .ruby-version file
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - run: bundle exec rake
-    
+  
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +17,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - run: bundle exec rake
+      - run: bundle lock --add-platform x86_64-linux
       # Add or replace any other lints here
       - name: Security audit dependencies
         run: bundle exec bundler-audit
