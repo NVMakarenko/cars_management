@@ -10,6 +10,8 @@ gem 'bundler-leak'
 gem 'colorize', '~> 0.8.1'
 # new wave Internationalization support for Ruby.
 gem 'i18n', '~> 1.12'
+# allows users to keep all configs in one place
+gem 'lefthook', '~> 0.5.5'
 # Ruby static code analyzer (a.k.a. linter) and code formatter
 gem 'rubocop', require: false
 gem 'rubocop-md', require: false

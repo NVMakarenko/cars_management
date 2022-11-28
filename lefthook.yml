@@ -1,0 +1,13 @@
+pre-commit:
+  parallel: true
+  commands:
+    rubocop:
+      tags: backend style
+      glob: "*.rb"
+      run: bundle exec rubocop {all_files}
+    bundler-audit:
+      tags: backend security
+      run: bundle exec bundler-audit
+    bundler-leak:
+      tags: memory leak
+      run: bundle exec bundler-leak
