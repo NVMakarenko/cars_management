@@ -11,8 +11,6 @@ jobs:
         with:
           ruby-version: 3.0.2
       - run: bundle install
-      - name: Rubocop
-        run: bundle exec rubocop
       - name: Bundler-leak
         run: bundle exec bundler-audit
       - name: Bundler-audit
