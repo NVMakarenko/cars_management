@@ -20,7 +20,7 @@ class Statistic
   def update_request_db
     @current_request.total_quantity = @search_result.size
     validate_uniq_request
-    File.open('db/request_history.yml', 'w+') { |file| file.write(@request_list.to_yaml) }
+    File.write('db/request_history.yml', @request_list.to_yaml)
   end
 
   def validate_uniq_request

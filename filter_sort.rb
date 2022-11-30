@@ -122,6 +122,6 @@ class FilterSort
   end
 
   def table_key(key)
-    I18n.t('sort').map { |k, v| v if k.to_s == key }.reject(&:nil?).first.green
+    I18n.t('sort').filter_map { |k, v| v if k.to_s == key }.first.green
   end
 end
