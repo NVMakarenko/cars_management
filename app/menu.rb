@@ -13,19 +13,19 @@ class Menu
   MENU_OPTIONS = [1, 2, 3, 4].freeze
 
   def call
-    loop do
-      puts
-      I18n.t('menu').each { |_key, value| puts value.blue }
-      decision = gets.chomp.to_i
-      puts I18n.t('decision.error') unless MENU_OPTIONS.include?(decision)
-      menu_option(decision) if MENU_OPTIONS.include?(decision)
-      break if decision == 4
-    end
+    puts
+    I18n.t('menu').each { |_key, value| puts value.blue }
+    decision = gets.chomp.to_i
+    puts I18n.t('decision.error') unless MENU_OPTIONS.include?(decision)
+    execute_menu_option(decision) if MENU_OPTIONS.include?(decision)
+    return if decision == 4
+
+    call
   end
 
   private
 
-  def menu_option(decision)
+  def execute_menu_option(decision)
     search_car if decision == 1
     show_list_cars if decision == 2
     show_help if decision == 3
