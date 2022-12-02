@@ -8,6 +8,7 @@ module OutputCarsTable
 
   def output(result)
     table = Terminal::Table.new title: I18n.t('sort.table_header').black.on_green do |row|
+      row.style = { border_bottom: false }
       list_objects_into_table(result, row)
     end
     puts table
