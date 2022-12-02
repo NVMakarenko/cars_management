@@ -1,7 +1,24 @@
 en:
+  welcome: Welcome on a way to your best car!
   index:
     language: "Please, choose language / "
     select_search_rules: "Please select search rules."
+  menu:
+    search_car: 1. Search a car
+    show_list_cars: 2. Show all cars
+    help: 3. Help
+    exit: 4. Exit
+  decision:
+    search: Search Car
+    show_all: List of all cars
+    help: Help
+    exit: Come back!
+    error: Please, enter correct option
+  help:
+    first: To start search - press 1
+    second: To look at all cars - press 2
+    third: For help - press 3 (you are here now)
+    fourth: To exit - press 4
   statistic:
     table_header: "Statistic"
     total_quantity: "Total Quantity: "

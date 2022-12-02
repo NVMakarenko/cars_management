@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
-require 'yaml'
-require 'date'
-require 'terminal-table'
-require 'i18n'
 require_relative 'car'
 require_relative 'request'
 require_relative 'statistic'
+require_relative 'module/output_cars_table'
+require_relative 'module/sort'
 
-class FilterSort
+class Filter
+  include OutputCarsTable
+  include Sort
+
   def initialize(request, cars_db)
     @request = request
     @cars_list = init_cars_list(cars_db)
@@ -22,11 +23,6 @@ class FilterSort
   end
 
   private
-
-  def init_cars_list(cars_db)
-    cars_list = YAML.load_file(cars_db)
-    cars_list.map { |car| Car.new(car) }
-  end
 
   def search_make
     result = @cars_list.select { |car| car.make.downcase == @request.make }
@@ -85,43 +81,5 @@ class FilterSort
     search_model
     search_year
     search_price
-  end
-
-  def sort(list)
-    print I18n.t('sort.option').yellow
-    sort_option = gets.chomp.downcase
-    print I18n.t('sort.direction').yellow
-    direction = gets.chomp.downcase
-    return sort_price(list, direction) if sort_option == 'price'
-    return list.sort_by!(&:date_added).reverse unless direction == 'asc'
-
-    list.sort_by!(&:date_added)
-  end
-
-  def sort_price(list, direction)
-    return list.sort_by!(&:price) if direction == 'asc'
-
-    list.sort_by!(&:price).reverse
-  end
-
-  def output(result)
-    table = Terminal::Table.new title: I18n.t('sort.table_header').black.on_green do |row|
-      list_objects_into_table(result, row)
-    end
-    puts table
-  end
-
-  def list_objects_into_table(result, row)
-    result.each do |car|
-      car.to_hash.each do |key, value|
-        row << [table_key(key), value.to_s] unless key == 'date_added'
-        row << [I18n.t('sort.date_added').green, value.strftime('%d/%m/%Y').to_s] if key == 'date_added'
-      end
-      row << :separator
-    end
-  end
-
-  def table_key(key)
-    I18n.t('sort').filter_map { |k, v| v if k.to_s == key }.first.green
   end
 end
