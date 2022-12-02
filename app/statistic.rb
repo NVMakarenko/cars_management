@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'terminal-table'
 require_relative 'request'
 
 class Statistic
