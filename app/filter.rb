@@ -2,24 +2,18 @@
 
 require_relative 'car'
 require_relative 'request'
-require_relative 'statistic'
-require_relative 'module/output_cars_table'
-require_relative 'module/sort'
 
 class Filter
-  include OutputCarsTable
-  include Sort
-
   def initialize(request, cars_db)
     @request = request
-    @cars_list = init_cars_list(cars_db)
+    @cars_list = cars_db
   end
 
   def call
-    search_result = filter
-    sorted_result = sort(search_result)
-    output(sorted_result)
-    sorted_result
+    search_make
+    search_model
+    search_year
+    search_price
   end
 
   private
@@ -74,12 +68,5 @@ class Filter
     @cars_list.select do |car|
       car.price.to_i >= price_from && car.price.to_i <= price_to
     end
-  end
-
-  def filter
-    search_make
-    search_model
-    search_year
-    search_price
   end
 end

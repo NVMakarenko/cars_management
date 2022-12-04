@@ -1,24 +1,25 @@
 # frozen_string_literal: true
 
-module OutputCarsTable
+class OutputCarsTable
   TABLE_TITLE_STYLE = { color: :black, background: :green }.freeze
   TABLE_ROW_STYLE = :green
 
-  def init_cars_list(cars_db)
-    cars_list = YAML.load_file(cars_db)
-    cars_list.map { |car| Car.new(car) }
+  def initialize(output_info)
+    @output = output_info
   end
 
-  def output(result)
+  def call
     table = Terminal::Table.new title: I18n.t('sort.table_header').colorize(TABLE_TITLE_STYLE) do |row|
       row.style = { border_bottom: false }
-      list_objects_into_table(result, row)
+      list_objects_into_table(row)
     end
     puts table
   end
 
-  def list_objects_into_table(result, row)
-    result.each do |car|
+  private
+
+  def list_objects_into_table(row)
+    @output.each do |car|
       car.to_hash.each do |car_property, car_property_value|
         row << [table_key(car_property), car_property_value.to_s] unless car_property == 'date_added'
         if car_property == 'date_added'
