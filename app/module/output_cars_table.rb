@@ -16,15 +16,20 @@ module OutputCarsTable
 
   def list_objects_into_table(result, row)
     result.each do |car|
-      car.to_hash.each do |key, value|
-        row << [table_key(key), value.to_s] unless key == 'date_added'
-        row << [I18n.t('sort.date_added').green, value.strftime('%d/%m/%Y').to_s] if key == 'date_added'
+      car.to_hash.each do |car_property, car_property_value|
+        row << [table_key(car_property), car_property_value.to_s] unless car_property == 'date_added'
+        if car_property == 'date_added'
+          row << [I18n.t('sort.date_added').green,
+                  car_property_value.strftime('%d/%m/%Y').to_s]
+        end
       end
       row << :separator
     end
   end
 
-  def table_key(key)
-    I18n.t('sort').filter_map { |k, v| v if k.to_s == key }.first.green
+  def table_key(car_property)
+    I18n.t('sort').filter_map do |translation_access, translation|
+      translation if translation_access.to_s == car_property
+    end.first.green
   end
 end
