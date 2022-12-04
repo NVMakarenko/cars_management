@@ -29,7 +29,7 @@ en:
     year_from: "Please choose year_from: "
     year_to: "Please choose year_to: "
     price_from: "Please choose price_from: "
-    price_to: "Please choose price_from: "
+    price_to: "Please choose price_to: "
   sort:
     id: "Id:"
     make: "Make:"
