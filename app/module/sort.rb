@@ -13,8 +13,9 @@ module Sort
   end
 
   def sort_price(list, direction)
-    return list.sort_by!(&:price) if direction == 'asc'
+    list.sort_by!(&:price)
+    return list if direction == 'asc'
 
-    list.sort_by!(&:price).reverse
+    list.reverse
   end
 end
