@@ -7,12 +7,10 @@ class Menu
   DB_CARS = 'db/db.yml'
   DB_REQUESTS = 'db/request_history.yml'
   MENU_OPTIONS = [1, 2, 3, 4].freeze
-  MENU_OPTIONS_STYLE = :blue
-  SEARCH_CAR_STYLE = :light_magenta
 
   def call
     puts
-    I18n.t('menu').each { |_key, menu_option| puts menu_option.colorize(MENU_OPTIONS_STYLE) }
+    I18n.t('menu').each { |_key, menu_option| puts menu_option.blue }
     decision = gets.chomp.to_i
     puts I18n.t('decision.error') unless MENU_OPTIONS.include?(decision)
     execute_menu_option(decision) if MENU_OPTIONS.include?(decision)
@@ -32,7 +30,7 @@ class Menu
 
   def search_car
     puts I18n.t('decision.search')
-    puts I18n.t('index.select_search_rules').colorize(SEARCH_CAR_STYLE)
+    puts I18n.t('index.select_search_rules').light_magenta
     request = Request.new
     search_result = Filter.new(request, init_cars_list(DB_CARS)).call
     sort = Sort.new.call(search_result)

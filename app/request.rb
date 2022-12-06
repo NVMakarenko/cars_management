@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Request
-  REQUEST_QUESTION_STYLE = :blue
   attr_accessor :make, :model, :year_from, :year_to, :price_from, :price_to, :total_quantity, :request_quantity
 
   def initialize(total_quantity = 0, request_quantity = 1)
@@ -35,39 +34,39 @@ class Request
   end
 
   def set_instance_char(params = {})
-    print I18n.t('request.make').colorize(REQUEST_QUESTION_STYLE)
+    print I18n.t('request.make').blue
     params[:make] = gets.chomp.downcase
     @make = params[:make] unless params[:make].empty?
     set_instance_model
   end
 
   def set_instance_model(params = {})
-    print I18n.t('request.model').colorize(REQUEST_QUESTION_STYLE)
+    print I18n.t('request.model').blue
     params[:model] = gets.chomp.downcase
     @model = params[:model] unless params[:model].empty?
   end
 
   def set_instance_year(params = {})
-    print I18n.t('request.year_from').colorize(REQUEST_QUESTION_STYLE)
+    print I18n.t('request.year_from').blue
     params[:year_from] = gets.chomp.to_i
     @year_from = params[:year_from] unless params[:year_from].zero?
     set_instance_year_to
   end
 
   def set_instance_year_to(params = {})
-    print I18n.t('request.year_to').colorize(REQUEST_QUESTION_STYLE)
+    print I18n.t('request.year_to').blue
     params[:year_to] = gets.chomp.to_i
     @year_to = params[:year_to] unless params[:year_to].zero?
   end
 
   def set_instance_price_from(params = {})
-    print I18n.t('request.price_from').colorize(REQUEST_QUESTION_STYLE)
+    print I18n.t('request.price_from').blue
     params[:price_from] = gets.chomp.to_i
     @price_from = params[:price_from] unless params[:price_from].zero?
   end
 
   def set_instance_price_to(params = {})
-    print I18n.t('request.price_to').colorize(REQUEST_QUESTION_STYLE)
+    print I18n.t('request.price_to').blue
     params[:price_to] = gets.chomp.to_i
     @price_to = params[:price_to] unless params[:price_to].zero?
   end

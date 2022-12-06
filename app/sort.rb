@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 class Sort
-  SORT_STYLE = :yellow
-
   def initialize
-    print I18n.t('sort.option').colorize(SORT_STYLE)
+    print I18n.t('sort.option').yellow
     @sort_option = gets.chomp.downcase
-    print I18n.t('sort.direction').colorize(SORT_STYLE)
+    print I18n.t('sort.direction').yellow
     @sort_direction = gets.chomp.downcase
   end
 
