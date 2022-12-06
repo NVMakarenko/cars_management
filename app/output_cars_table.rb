@@ -31,8 +31,8 @@ class OutputCarsTable
   end
 
   def table_key(car_property)
-    I18n.t('sort').filter_map do |translation_access, translation|
-      translation if translation_access.to_s == car_property
-    end.first.green
+    I18n.t('sort').find do |translation_access, _translation|
+      translation_access.to_s == car_property
+    end.last.green
   end
 end
