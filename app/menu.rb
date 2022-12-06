@@ -6,14 +6,12 @@ require_relative 'statistic'
 class Menu
   DB_CARS = 'db/db.yml'
   DB_REQUESTS = 'db/request_history.yml'
-  MENU_OPTIONS = [1, 2, 3, 4].freeze
 
   def call
     puts
-    I18n.t('menu').each { |_key, menu_option| puts menu_option.blue }
+    I18n.t('menu').each_value { |menu_option| puts menu_option.blue }
     decision = gets.chomp.to_i
-    puts I18n.t('decision.error') unless MENU_OPTIONS.include?(decision)
-    execute_menu_option(decision) if MENU_OPTIONS.include?(decision)
+    execute_menu_option(decision)
     return if decision == 4
 
     call
@@ -22,10 +20,15 @@ class Menu
   private
 
   def execute_menu_option(decision)
-    search_car if decision == 1
-    show_list_cars if decision == 2
-    show_help if decision == 3
-    puts I18n.t('decision.exit') if decision == 4
+    case decision
+    when 1 then search_car
+    when 2 then show_list_cars
+    when 3 then show_help
+    when 4
+      puts I18n.t('decision.exit')
+    else
+      puts I18n.t('decision.error')
+    end
   end
 
   def search_car
