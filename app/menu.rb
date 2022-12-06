@@ -51,7 +51,7 @@ class Menu
   def show_help
     puts
     puts I18n.t('decision.help')
-    I18n.t('help').each { |_key, help_option| puts help_option }
+    I18n.t('help').each_value { |help_option| puts help_option }
   end
 
   def init_cars_list(cars_db)
