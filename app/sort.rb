@@ -9,8 +9,9 @@ class Sort
   end
 
   def call(list)
-    list.sort_by!(&:date_added)
     return sort_price(list) if @sort_option == 'price'
+
+    list.sort_by!(&:date_added)
     return list if @sort_direction == 'asc'
 
     list.reverse
