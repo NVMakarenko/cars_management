@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'date'
-
 class Car
   attr_reader :id, :make, :model, :year, :odometer, :price, :description, :date_added
 

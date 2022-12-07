@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'terminal-table'
 require_relative 'request'
 
 class Statistic
@@ -8,6 +7,7 @@ class Statistic
     @search_result = search_result
     @current_request = current_request
     @request_list = YAML.safe_load(File.open(request_db), permitted_classes: [Request])
+    @request_list ||= []
   end
 
   def call

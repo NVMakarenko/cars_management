@@ -13,7 +13,5 @@ jobs:
       - run: bundle install
       - name: Rubocop
         run: bundle exec rubocop
-      - name: Bundler-leak
-        run: bundle exec bundler-audit
       - name: Bundler-audit
         run: bundle exec bundler-audit
