@@ -25,21 +25,29 @@ class Authentication
   end
 
   def login
-    puts I18n.t('user.email')
-    email = gets.chomp
-    puts I18n.t('user.password')
-    password = gets.chomp
-    input_user = User.new(email, password)
-    @current_user = input_user if validate_user(input_user)
-    return puts I18n.t('user.error.user_exist') unless validate_user(input_user)
+    email = enter_value(I18n.t('user.email'))
+    input_user = @user_list.find { |user| user.email == email }
+    return puts I18n.t('user.error.user_exist') if input_user.nil?
 
-    puts "#{I18n.t('user.hello')} #{@current_user.email}!"
-    @current_user
+    find_by_email_and_password(email)
+  end
+
+  def find_by_email_and_password(email)
+    password = enter_value(I18n.t('user.password'))
+    input_user = @user_list.find { |user| user.email == email && user.password == password }
+    return puts I18n.t('user.error.user_password') if input_user.nil?
+
+    puts "#{I18n.t('user.hello')} #{input_user.email}!"
+    @current_user = input_user
+  end
+
+  def enter_value(value)
+    puts value
+    gets.chomp
   end
 
   def sign_up
-    puts I18n.t('user.email')
-    email = gets.chomp
+    email = enter_email
     return puts I18n.t('user.error.email_length') unless validate_email_length(email)
     return puts I18n.t('user.error.email_uniq') unless validate_email_uniq(email)
 
@@ -50,8 +58,7 @@ class Authentication
   private
 
   def setting_password(email)
-    puts I18n.t('user.password')
-    password = gets.chomp
+    password = enter_password
     return puts I18n.t('user.error.password') unless validate_password(password)
 
     incrypted_password = BCrypt::Password.create(password)
@@ -75,10 +82,5 @@ class Authentication
 
   def validate_password(password)
     password =~ PASSWOORD_REQUIREMENTS
-  end
-
-  def validate_user(input_user)
-    @user_list.each { |user| return true if user == (input_user) }
-    false
   end
 end

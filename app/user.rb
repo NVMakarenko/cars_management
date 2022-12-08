@@ -7,8 +7,4 @@ class User
     @email = email
     @password = password
   end
-
-  def ==(other)
-    email == other.email && password == other.password
-  end
 end

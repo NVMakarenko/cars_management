@@ -35,7 +35,8 @@ en:
       email_length: Email should contain at least 5 symbols before @
       email_uniq: Email should be uniq
       password: Password should contain 8-20 symbols, at least 1 capital letter, at least 2 special symbols
-      user_exist: Such user does not exist
+      user_exist: User with such email does not registered
+      user_password: Wrong password
   statistic:
     table_header: "Statistic"
     total_quantity: "Total Quantity: "
