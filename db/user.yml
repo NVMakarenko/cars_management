@@ -1,0 +1,25 @@
+---
+- !ruby/object:User
+  email: test3@ukr.net
+  password: !ruby/string:BCrypt::Password
+    str: "$2a$12$utHbrETdxfyyLrP4Z.mhze5esAlbEfMk8SWHHdHdTDOVNplf56LIa"
+    version: 2a
+    cost: 12
+    salt: "$2a$12$utHbrETdxfyyLrP4Z.mhze"
+    checksum: 5esAlbEfMk8SWHHdHdTDOVNplf56LIa
+- !ruby/object:User
+  email: test1@ukr
+  password: !ruby/string:BCrypt::Password
+    str: "$2a$12$Q2uYSxf5VCJDHsn0E4w13ecPUdinq19hgJdAxDDcmI9LRt0GWCzEC"
+    version: 2a
+    cost: 12
+    salt: "$2a$12$Q2uYSxf5VCJDHsn0E4w13e"
+    checksum: cPUdinq19hgJdAxDDcmI9LRt0GWCzEC
+- !ruby/object:User
+  email: test2@ukr.net
+  password: !ruby/string:BCrypt::Password
+    str: "$2a$12$duW8hwP0FqRG3jGJjH9H7.UIXPXsf5NV29hWthg9adKAQq4YUS.36"
+    version: 2a
+    cost: 12
+    salt: "$2a$12$duW8hwP0FqRG3jGJjH9H7."
+    checksum: UIXPXsf5NV29hWthg9adKAQq4YUS.36
