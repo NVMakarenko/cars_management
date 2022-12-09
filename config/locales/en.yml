@@ -32,12 +32,8 @@ en:
     log_out: See you later
     password: Please, enter your password
     error:
-      email_format: Wrong format of email
-      email_length: Email should contain at least 5 symbols before @
-      email_uniq: Email should be uniq
-      password_length: Password should contain 8-20 symbols
-      password_upper: Password should contain at least 1 capital letter
-      password_signs: Password should contain at least 2 special symbols
+      email: Email should contain at least 5 symbols before @, be uniq and have email-type format
+      password: Password should contain 8-20 symbolsб at least 1 capital letter, at least 2 special symbols
       user_exist: User with such email does not registered
       user_password: Wrong password
   statistic:
