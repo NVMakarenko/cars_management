@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-require 'yaml'
-require 'date'
-require 'terminal-table'
-require 'i18n'
+require 'bcrypt'
 require 'colorize'
+require 'date'
+require 'i18n'
+require 'terminal-table'
+require 'uri'
+require 'yaml'
 require_relative 'app/authentication'
 require_relative 'app/menu'
 require_relative 'app/output_cars_table'
