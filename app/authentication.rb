@@ -38,11 +38,6 @@ class Authentication
     @current_user = input_user
   end
 
-  def enter_value(value)
-    puts value
-    gets.chomp
-  end
-
   def sign_up
     email = enter_value(I18n.t('user.email'))
     return invalid_email_message(email) unless email_valid?(email)
@@ -53,19 +48,28 @@ class Authentication
 
   private
 
+  def enter_value(value)
+    puts value
+    gets.chomp
+  end
+
   def setting_password(email)
     password = enter_value(I18n.t('user.password'))
     return invalid_password_message(password) unless password_valid?(password)
 
-    incrypted_password = BCrypt::Password.create(password)
-    @current_user = User.new(email, incrypted_password)
-    add_new_user
+    create_and_save_new_user(email, password)
+    puts "#{I18n.t('user.hello')} #{@current_user.email}!"
   end
 
-  def add_new_user
+  def create_and_save_new_user(email, password)
+    incrypted_password = BCrypt::Password.create(password)
+    @current_user = User.new(email, incrypted_password)
+    add_new_user_to_db
+  end
+
+  def add_new_user_to_db
     @user_list.push(@current_user)
     File.write(DB_USERS, @user_list.to_yaml)
-    puts "#{I18n.t('user.hello')} #{@current_user.email}!"
   end
 
   def password_valid?(password)
