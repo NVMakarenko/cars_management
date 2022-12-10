@@ -26,23 +26,24 @@ class Authentication
   def login
     email = enter_value(I18n.t('user.email'))
     input_user = @user_list.find { |user| user.email == email }
-    return puts I18n.t('user.error.user_exist') if input_user.nil?
+    return puts I18n.t('user.error.user_exist').red if input_user.nil?
 
     find_by_email_and_password(email)
   end
 
   def find_by_email_and_password(email)
-    password = enter_value(I18n.t('user.password'))
+    puts I18n.t('user.password').blue
+    password = $stdin.noecho(&:gets).chomp
     input_user = @user_list.find { |user| user.email == email && user.password == password }
     return puts I18n.t('user.error.user_password') if input_user.nil?
 
-    puts "#{I18n.t('user.hello')} #{input_user.email}!"
+    puts "#{I18n.t('user.hello')} #{input_user.email}!".green
     @current_user = input_user
   end
 
   def sign_up
     email = enter_value(I18n.t('user.email'))
-    return puts I18n.t('user.error.email') unless VallidationEmail.valid?(email)
+    return puts I18n.t('user.error.email').red unless VallidationEmail.valid?(email)
 
     setting_password(email)
     @current_user
@@ -51,16 +52,17 @@ class Authentication
   private
 
   def enter_value(value)
-    puts value
+    puts value.blue
     gets.chomp
   end
 
   def setting_password(email)
-    password = enter_value(I18n.t('user.password'))
+    puts I18n.t('user.password')
+    password = $stdin.noecho(&:gets).chomp
     return puts I18n.t('user.error.password') unless VallidationPassword.valid?(password)
 
     create_and_save_new_user(email, password)
-    puts "#{I18n.t('user.hello')} #{@current_user.email}!"
+    puts "#{I18n.t('user.hello')} #{@current_user.email}!".green
   end
 
   def create_and_save_new_user(email, password)
