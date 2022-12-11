@@ -8,7 +8,7 @@ class Authentication
   DB_USERS = 'db/user.yml'
 
   def initialize
-    @user_list = YAML.safe_load(File.open(DB_USERS), permitted_classes: [User, BCrypt::Password])
+    @user_list = YAML.safe_load(File.open('db/user.yml'), permitted_classes: [User, BCrypt::Password])
     @user_list ||= []
     @current_user = nil
   end
@@ -40,7 +40,7 @@ class Authentication
     input_user = @user_list.find { |user| user.email == email && user.password == password }
     return puts I18n.t('user.error.user_password') if input_user.nil?
 
-    puts "#{I18n.t('user.hello')} #{input_user.email}!".green
+    puts I18n.t('user.hello', user_email: input_user.email).green
     @current_user = input_user
   end
 

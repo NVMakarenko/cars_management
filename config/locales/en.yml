@@ -28,8 +28,8 @@ en:
       sign_up: 2. Sign up
     action: Login - choose 1. Sign up - choose 2
     email: Please, enter your email
-    hello: Hello,
-    log_out: See you later
+    hello: "Hello, %{user_email}"
+    log_out: "See you later, %{user_email}!"
     password: Please, enter your password
     error:
       email: Email should contain at least 5 symbols before @, be uniq and have email-type format

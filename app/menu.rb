@@ -74,7 +74,7 @@ class Menu
   end
 
   def log_out
-    puts "#{I18n.t('user.log_out')} #{@current_user.email}!"
+    puts I18n.t('user.log_out', user_email: @current_user.email)
     @current_user = nil
   end
 
