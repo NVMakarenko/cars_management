@@ -8,7 +8,10 @@ class Authentication
   DB_USERS = 'db/user.yml'
 
   def initialize
-    @user_list = YAML.safe_load(File.open('db/user.yml'), permitted_classes: [User, BCrypt::Password])
+    if File.exist?(DB_USERS)
+      @user_list = YAML.safe_load(File.open(DB_USERS),
+                                  permitted_classes: [User, BCrypt::Password])
+    end
     @user_list ||= []
     @current_user = nil
   end
@@ -35,7 +38,7 @@ class Authentication
   end
 
   def sign_up
-    email = enter_value(I18n.t('user.email'))
+    email = enter_email
     return puts I18n.t('user.error.email').red unless EmailVallidation.valid?(email)
 
     setting_password(email)

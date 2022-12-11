@@ -6,7 +6,7 @@ class Statistic
   def initialize(search_result, current_request, request_db)
     @search_result = search_result
     @current_request = current_request
-    @request_list = YAML.safe_load(File.open(request_db), permitted_classes: [Request])
+    @request_list = YAML.safe_load(File.open(request_db), permitted_classes: [Request]) if File.exist?(request_db)
     @request_list ||= []
   end
 

@@ -7,7 +7,10 @@ class EmailVallidation
 
   def initialize(email)
     @email = email
-    @user_list = YAML.safe_load(File.open(DB_USERS), permitted_classes: [User, BCrypt::Password])
+    if File.exist?(DB_USERS)
+      @user_list = YAML.safe_load(File.open(DB_USERS),
+                                  permitted_classes: [User, BCrypt::Password])
+    end
     @user_list ||= []
   end
 
