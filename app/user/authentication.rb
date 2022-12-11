@@ -8,11 +8,12 @@ class Authentication
   DB_USERS = 'db/user.yml'
 
   def initialize
-    if File.exist?(DB_USERS)
-      @user_list = YAML.safe_load(File.open(DB_USERS),
+    @user_list = if File.exist?(DB_USERS)
+                   YAML.safe_load(File.open(DB_USERS),
                                   permitted_classes: [User, BCrypt::Password])
-    end
-    @user_list ||= []
+                 else
+                   []
+                 end
     @current_user = nil
   end
 
