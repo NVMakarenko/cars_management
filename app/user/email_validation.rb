@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class VallidationEmail
+class EmailVallidation
   DB_USERS = 'db/user.yml'
 
   attr_reader :email

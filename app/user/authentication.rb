@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'user'
-require_relative 'validation_email'
-require_relative 'validation_password'
+require_relative 'email_validation'
+require_relative 'password_validation'
 
 class Authentication
   DB_USERS = 'db/user.yml'
@@ -36,7 +36,7 @@ class Authentication
 
   def sign_up
     email = enter_value(I18n.t('user.email'))
-    return puts I18n.t('user.error.email').red unless VallidationEmail.valid?(email)
+    return puts I18n.t('user.error.email').red unless EmailVallidation.valid?(email)
 
     setting_password(email)
     @current_user
@@ -56,7 +56,7 @@ class Authentication
 
   def setting_password(email)
     password = enter_password
-    return puts I18n.t('user.error.password') unless VallidationPassword.valid?(password)
+    return puts I18n.t('user.error.password') unless PasswordVallidation.valid?(password)
 
     create_and_save_new_user(email, password)
     puts I18n.t('user.hello', user_email: @current_user.email).green

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class VallidationPassword
+class PasswordVallidation
   def initialize(password)
     @password = password
   end
