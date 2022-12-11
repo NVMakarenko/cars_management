@@ -22,9 +22,12 @@ class Menu
   def print_menu
     puts
     I18n.t('menu').each_value { |menu_option| puts menu_option.blue }
-    puts I18n.t('log_in').blue unless @current_user
-    puts I18n.t('sign_up').blue unless @current_user
-    puts I18n.t('log_out').blue if @current_user
+    if @current_user
+      puts I18n.t('log_out').blue
+    else
+      puts I18n.t('log_in').blue
+      puts I18n.t('sign_up').blue
+    end
   end
 
   def execute_menu_option(decision)
@@ -64,7 +67,7 @@ class Menu
 
   def authentication_action(decision)
     case decision
-    when 5 then@current_user = Authentication.new.login
+    when 5 then @current_user = Authentication.new.login
     when 6 then @current_user = Authentication.new.sign_up
     when 7 then log_out
     end

@@ -17,8 +17,11 @@ class Authentication
     puts
     I18n.t('user.menu').each_value { |menu_option| puts menu_option.blue }
     user_action = gets.chomp.to_i
-    login if user_action == 1
-    sign_up unless user_action == 1
+    if user_action == 1
+      login
+    else
+      sign_up
+    end
 
     @current_user
   end
