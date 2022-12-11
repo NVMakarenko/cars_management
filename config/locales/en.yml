@@ -1,5 +1,8 @@
 en:
   welcome: Welcome on a way to your best car!
+  log_in: 5. Log In
+  sign_up: 6. Sign up
+  log_out: 7. Log Out
   index:
     language: "Please, choose language / "
     select_search_rules: "Please select search rules."
@@ -19,6 +22,20 @@ en:
     second: To look at all cars - press 2
     third: For help - press 3 (you are here now)
     fourth: To exit - press 4
+  user:
+    menu:
+      log_in: 1. Log In
+      sign_up: 2. Sign up
+    action: Login - choose 1. Sign up - choose 2
+    email: Please, enter your email
+    hello: "Hello, %{user_email}"
+    log_out: "See you later, %{user_email}!"
+    password: Please, enter your password
+    error:
+      email: Email should contain at least 5 symbols before @, be uniq and have email-type format
+      password: Password should contain 8-20 symbolsб at least 1 capital letter, at least 2 special symbols
+      user_exist: User with such email does not registered
+      user_password: Wrong password
   statistic:
     table_header: "Statistic"
     total_quantity: "Total Quantity: "

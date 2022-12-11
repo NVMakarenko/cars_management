@@ -2,6 +2,8 @@
 
 source 'https://rubygems.org'
 
+# provides a simple wrapper for safely handling passwords
+gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 # provides patch-level verification for Bundled apps
 gem 'bundler-audit'
 # tool that provides memory leak verification for Bundled apps

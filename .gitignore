@@ -330,4 +330,7 @@ build-iPhoneSimulator/
 .history
 .ionide
 
+#db_files
+./db/user.yml
+./db/request_history.yml
 # End of https://www.toptal.com/developers/gitignore/api/ruby,visualstudiocode,node,intellij
