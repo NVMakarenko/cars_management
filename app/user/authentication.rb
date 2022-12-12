@@ -21,9 +21,10 @@ class Authentication
     puts
     I18n.t('user.menu').each_value { |menu_option| puts menu_option.blue }
     user_action = gets.chomp.to_i
-    if user_action == 1
+    case user_action
+    when 1
       login
-    else
+    when 2
       sign_up
     end
 
@@ -36,6 +37,7 @@ class Authentication
 
     find_user_in_db(email, password)
     puts I18n.t('user.hello', user_email: @current_user.email).green unless @current_user.nil?
+    @current_user
   end
 
   def sign_up

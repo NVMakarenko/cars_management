@@ -1,0 +1,41 @@
+---
+- !ruby/object:UserRequest
+  make: opel
+  model: zafira
+  year_from:
+  year_to:
+  price_from:
+  price_to:
+  user: test1@ukr
+- !ruby/object:UserRequest
+  make: mustang
+  model:
+  year_from:
+  year_to:
+  price_from:
+  price_to:
+  user:
+- !ruby/object:UserRequest
+  make: bmw
+  model: x5
+  year_from:
+  year_to:
+  price_from:
+  price_to:
+  user: test1@ukr
+- !ruby/object:UserRequest
+  make: ford
+  model: fusion
+  year_from:
+  year_to:
+  price_from:
+  price_to:
+  user:
+- !ruby/object:UserRequest
+  make:
+  model:
+  year_from:
+  year_to:
+  price_from:
+  price_to:
+  user:

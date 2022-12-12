@@ -2,7 +2,9 @@ en:
   welcome: Welcome on a way to your best car!
   log_in: 5. Log In
   sign_up: 6. Sign up
-  log_out: 7. Log Out
+  show_my_search: 5. Show my searches
+  log_out: 6. Log Out
+  no_result: Nothing to show
   index:
     language: "Please, choose language / "
     select_search_rules: "Please select search rules."
@@ -26,6 +28,7 @@ en:
     menu:
       log_in: 1. Log In
       sign_up: 2. Sign up
+      unauthor: 3. Stay unauthorized
     action: Login - choose 1. Sign up - choose 2
     email: Please, enter your email
     hello: "Hello, %{user_email}"
@@ -59,3 +62,8 @@ en:
     date_added: "Date added:"
     option: "Please choose sort option (date_added|price): "
     direction: "Please choose sort direction(desc|asc): "
+    year_from: Year from
+    year_to: Year to
+    price_from: Price from
+    price_to: Price to
+    user: User

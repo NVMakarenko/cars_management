@@ -333,4 +333,5 @@ build-iPhoneSimulator/
 #db_files
 ./db/user.yml
 ./db/request_history.yml
+./db/user_request.yml
 # End of https://www.toptal.com/developers/gitignore/api/ruby,visualstudiocode,node,intellij
