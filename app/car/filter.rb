@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'car'
-require_relative 'request'
-
 class Filter
   def initialize(request, cars_db)
     @request = request

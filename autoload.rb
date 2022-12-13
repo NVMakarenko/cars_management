@@ -8,9 +8,10 @@ require 'io/console'
 require 'terminal-table'
 require 'uri'
 require 'yaml'
-require_relative 'app/menu'
-require_relative 'app/output'
-require_relative 'app/sort'
-require_relative 'app/user/authentication'
-require_relative 'app/user/user'
+
+Dir['./app/*.rb'].each { |file| require file }
+Dir['./app/car/*.rb'].each { |file| require file }
+Dir['./app/request/*.rb'].each { |file| require file }
+Dir['./app/user/*.rb'].each { |file| require file }
+
 require_relative 'locale'

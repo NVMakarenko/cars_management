@@ -12,6 +12,11 @@ class UserRequest < Request
             end
   end
 
+  def ==(other)
+    super &&
+      user == other.user
+  end
+
   private
 
   def request_part(request)
