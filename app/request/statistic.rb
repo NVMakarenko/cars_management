@@ -10,8 +10,8 @@ class Statistic
     @search_result = search_result
     @current_request = current_request
     @current_user = current_user
-    @request_list = load_file(DB_REQUESTS, Request)
-    @user_request_list = load_file(DB_USER_REQUESTS, UserRequest)
+    @request_list = Database.new(DB_REQUESTS).load_file_with_permission(Request)
+    @user_request_list = Database.new(DB_USER_REQUESTS).load_file_with_permission(UserRequest)
   end
 
   def call
@@ -21,35 +21,25 @@ class Statistic
   end
 
   def show_user_search
-    unless @current_user.nil?
-      return @user_request_list.select do |user_request|
-               user_request.user == @current_user.email
-             end
-    end
+    return if @current_user.nil?
 
-    @user_request_list.select { |user_request| user_request.user.nil? }
+    @user_request_list.select do |user_request|
+      user_request.user == @current_user.email
+    end
   end
 
   private
 
-  def load_file(db_adress, permission)
-    if File.exist?(db_adress)
-      YAML.safe_load(File.open(db_adress), permitted_classes: [permission])
-    else
-      []
-    end
-  end
-
   def update_request_db
     @current_request.total_quantity = @search_result.size
     validate_uniq_request(@request_list, @current_request)
-    File.write(DB_REQUESTS, @request_list.to_yaml)
+    Database.new(DB_REQUESTS).save(@request_list)
   end
 
   def update_user_request_db
     my_request = UserRequest.new(@current_request, @current_user)
     validate_uniq_request(@user_request_list, my_request)
-    File.write(DB_USER_REQUESTS, @user_request_list.to_yaml)
+    Database.new(DB_USER_REQUESTS).save(@user_request_list)
   end
 
   def validate_uniq_request(list_of_objects, current_object)

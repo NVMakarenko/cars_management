@@ -44,7 +44,7 @@ class ExecuteMenu
   end
 
   def search_and_sort_cars(request)
-    search_result = Filter.new(request, init_cars_list(DB_CARS)).call
+    search_result = Filter.new(request, init_cars_list).call
     sort = Sort.new.call(search_result)
     Output.new(sort).call
     Statistic.new(current_user: @current_user, search_result: search_result, current_request: request).call
@@ -52,7 +52,7 @@ class ExecuteMenu
 
   def show_list_cars
     puts I18n.t('decision.show_all')
-    list_all_cars = init_cars_list(DB_CARS)
+    list_all_cars = init_cars_list
     sort = Sort.new.call(list_all_cars)
     Output.new(sort).call
   end
@@ -89,8 +89,8 @@ class ExecuteMenu
     @current_user = nil
   end
 
-  def init_cars_list(cars_db)
-    cars_list = YAML.load_file(cars_db)
+  def init_cars_list
+    cars_list = Database.new(DB_CARS).load_file
     cars_list.map { |car| Car.new(car) }
   end
 end
