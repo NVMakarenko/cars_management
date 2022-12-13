@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class Menu
+  SEARCH_CAR = 1
+  SHOW_LIST_CARS = 2
+  SHOW_HELP = 3
+  EXIT = 4
+  LOGIN_OR_SEARCHES = 5
+  SIGN_OR_LOGOUT = 6
+
   def call(current_user)
     @current_user = current_user
     print_menu
@@ -14,18 +21,20 @@ class Menu
   private
 
   def print_menu
-    puts
-    I18n.t('menu').each_value { |menu_option| puts menu_option.blue }
+    puts I18n.t('menu.search_car', menu_option: SEARCH_CAR).blue
+    puts I18n.t('menu.show_list_cars', menu_option: SHOW_LIST_CARS).blue
+    puts I18n.t('menu.help', menu_option: SHOW_HELP).blue
+    puts I18n.t('menu.exit', menu_option: EXIT).blue
     print_additional_menu
   end
 
   def print_additional_menu
     if @current_user
-      puts I18n.t('show_my_search').blue
-      puts I18n.t('log_out').blue
+      puts I18n.t('show_my_search', menu_option: LOGIN_OR_SEARCHES).blue
+      puts I18n.t('log_out', menu_option: SIGN_OR_LOGOUT).blue
     else
-      puts I18n.t('log_in').blue
-      puts I18n.t('sign_up').blue
+      puts I18n.t('log_in', menu_option: LOGIN_OR_SEARCHES).blue
+      puts I18n.t('sign_up', menu_option: SIGN_OR_LOGOUT).blue
     end
   end
 end

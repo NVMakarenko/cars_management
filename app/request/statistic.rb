@@ -10,8 +10,8 @@ class Statistic
     @search_result = search_result
     @current_request = current_request
     @current_user = current_user
-    @request_list = Database.new(DB_REQUESTS).load_file_with_permission(Request)
-    @user_request_list = Database.new(DB_USER_REQUESTS).load_file_with_permission(UserRequest)
+    @request_list = Database.new(DB_REQUESTS).load_file_with_permission(permission: Request)
+    @user_request_list = Database.new(DB_USER_REQUESTS).load_file_with_permission(permission: UserRequest)
   end
 
   def call

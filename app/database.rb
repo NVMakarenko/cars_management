@@ -9,9 +9,9 @@ class Database
     YAML.load_file(@db_adress)
   end
 
-  def load_file_with_permission(permission)
+  def load_file_with_permission(permission:, crypt: nil)
     if File.exist?(@db_adress)
-      YAML.safe_load(File.open(@db_adress), permitted_classes: [permission])
+      YAML.safe_load(File.open(@db_adress), permitted_classes: [permission, crypt])
     else
       []
     end

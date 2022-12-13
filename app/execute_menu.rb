@@ -2,6 +2,12 @@
 
 class ExecuteMenu
   DB_CARS = 'db/db.yml'
+  SEARCH_CAR = 1
+  SHOW_LIST_CARS = 2
+  SHOW_HELP = 3
+  EXIT = 4
+  LOGIN_OR_SEARCHES = 5
+  SIGN_OR_LOGOUT = 6
 
   def initialize(decision, current_user)
     @decision = decision
@@ -10,8 +16,8 @@ class ExecuteMenu
 
   def call
     case @decision
-    when 1..4 then exec_main_menu
-    when 5..6 then additional_action
+    when SEARCH_CAR, SHOW_LIST_CARS, SHOW_HELP, EXIT then exec_main_menu
+    when LOGIN_OR_SEARCHES, SIGN_OR_LOGOUT then additional_action
     else
       puts I18n.t('decision.error')
     end
@@ -22,17 +28,17 @@ class ExecuteMenu
 
   def exec_main_menu
     case @decision
-    when 1 then search_car
-    when 2 then show_list_cars
-    when 3 then show_help
-    when 4 then puts I18n.t('decision.exit')
+    when SEARCH_CAR then search_car
+    when SHOW_LIST_CARS then show_list_cars
+    when SHOW_HELP then show_help
+    when EXIT then puts I18n.t('decision.exit')
     end
   end
 
   def additional_action
     case @decision
-    when 5 then exec_login_or_searches
-    when 6 then exec_sign_or_logout
+    when LOGIN_OR_SEARCHES then exec_login_or_searches
+    when SIGN_OR_LOGOUT then exec_sign_or_logout
     end
   end
 
@@ -59,8 +65,11 @@ class ExecuteMenu
 
   def show_help
     puts
-    puts I18n.t('decision.help')
-    I18n.t('help').each_value { |help_option| puts help_option }
+    puts I18n.t('decision.help').yellow
+    puts I18n.t('help.first', menu_option: SEARCH_CAR).yellow
+    puts I18n.t('help.second', menu_option: SHOW_LIST_CARS).yellow
+    puts I18n.t('help.third', menu_option: SHOW_HELP).yellow
+    puts I18n.t('help.fourth', menu_option: EXIT).yellow
   end
 
   def exec_login_or_searches

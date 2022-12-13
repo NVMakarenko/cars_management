@@ -1,18 +1,18 @@
 en:
   welcome: Welcome on a way to your best car!
-  log_in: 5. Log In
-  sign_up: 6. Sign up
-  show_my_search: 5. Show my searches
-  log_out: 6. Log Out
+  log_in: '%{menu_option}. Log In'
+  sign_up: '%{menu_option}. Sign up'
+  show_my_search: '%{menu_option}. Show my searches'
+  log_out: '%{menu_option}. Log Out'
   no_result: Nothing to show
   index:
     language: "Please, choose language / "
     select_search_rules: "Please select search rules."
   menu:
-    search_car: 1. Search a car
-    show_list_cars: 2. Show all cars
-    help: 3. Help
-    exit: 4. Exit
+    search_car: '%{menu_option}. Search a car'
+    show_list_cars: '%{menu_option}. Show all cars'
+    help: '%{menu_option}. Help'
+    exit: '%{menu_option}. Exit'
   decision:
     search: Search Car
     show_all: List of all cars
@@ -20,16 +20,15 @@ en:
     exit: Come back!
     error: Please, enter correct option
   help:
-    first: To start search - press 1
-    second: To look at all cars - press 2
-    third: For help - press 3 (you are here now)
-    fourth: To exit - press 4
+    first: 'To start search - press %{menu_option}'
+    second: 'To look at all cars - press %{menu_option}'
+    third: 'For help - press %{menu_option} (you are here now)'
+    fourth: 'To exit - press %{menu_option}'
   user:
     menu:
-      log_in: 1. Log In
-      sign_up: 2. Sign up
-      unauthor: 3. Stay unauthorized
-    action: Login - choose 1. Sign up - choose 2
+      log_in: '%{menu_option}. Log In'
+      sign_up: '%{menu_option}. Sign up'
+      unauthor: '%{menu_option}. Stay unauthorized'
     email: Please, enter your email
     hello: "Hello, %{user_email}"
     log_out: "See you later, %{user_email}!"
