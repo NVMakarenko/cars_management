@@ -3,7 +3,7 @@
 class EmailVallidation
   DB_USERS = 'db/user.yml'
 
-  attr_reader :email
+  attr_reader :email, :user_list
 
   def initialize(email)
     @email = email
@@ -27,14 +27,14 @@ class EmailVallidation
   private
 
   def email_length_valid?
-    @email.split('@').first.length >= 5
+    email.split('@').first.length >= 5
   end
 
   def email_format_valid?
-    @email.match?(URI::MailTo::EMAIL_REGEXP)
+    email.match?(URI::MailTo::EMAIL_REGEXP)
   end
 
   def email_uniq?
-    @user_list.each { |user| return false if user.email == @email }
+    user_list.each { |user| return false if user.email == email }
   end
 end

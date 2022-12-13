@@ -3,17 +3,15 @@
 class ExecuteMenu
   DB_CARS = 'db/db.yml'
 
-  attr_accessor :decision, :current_user
-
   def initialize(decision, current_user)
     @decision = decision
     @current_user = current_user
   end
 
   def call
-    case decision
-    when 1..4 then exec_main_menu(decision)
-    when 5..6 then additional_action(decision)
+    case @decision
+    when 1..4 then exec_main_menu
+    when 5..6 then additional_action
     else
       puts I18n.t('decision.error')
     end
@@ -22,8 +20,8 @@ class ExecuteMenu
 
   private
 
-  def exec_main_menu(decision)
-    case decision
+  def exec_main_menu
+    case @decision
     when 1 then search_car
     when 2 then show_list_cars
     when 3 then show_help
@@ -31,8 +29,8 @@ class ExecuteMenu
     end
   end
 
-  def additional_action(decision)
-    case decision
+  def additional_action
+    case @decision
     when 5 then exec_login_or_searches
     when 6 then exec_sign_or_logout
     end
@@ -82,7 +80,7 @@ class ExecuteMenu
   end
 
   def show_user_search
-    user_searches = Statistic.new(@current_user).show_user_search
+    user_searches = Statistic.new(current_user: @current_user).show_user_search
     Output.new(user_searches).call
   end
 
