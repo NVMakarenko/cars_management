@@ -49,7 +49,7 @@ class ExecuteMenu
     search_result = Filter.new(request, init_cars_list(DB_CARS)).call
     sort = Sort.new.call(search_result)
     Output.new(sort).call
-    Statistic.new(@current_user, search_result, request).call
+    Statistic.new(current_user: @current_user, search_result: search_result, current_request: request).call
   end
 
   def show_list_cars
@@ -82,7 +82,7 @@ class ExecuteMenu
   end
 
   def show_user_search
-    user_searches = Statistic.new(@current_user, nil, nil).show_user_search
+    user_searches = Statistic.new(@current_user).show_user_search
     Output.new(user_searches).call
   end
 

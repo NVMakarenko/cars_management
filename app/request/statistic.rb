@@ -6,7 +6,7 @@ class Statistic
   DB_REQUESTS = 'db/request_history.yml'
   DB_USER_REQUESTS = 'db/user_request.yml'
 
-  def initialize(current_user, search_result, current_request)
+  def initialize(current_user:, search_result: nil, current_request: nil)
     @search_result = search_result
     @current_request = current_request
     @current_user = current_user
