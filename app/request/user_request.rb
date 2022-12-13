@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UserRequest < Request
-  attr_accessor :make, :model, :year_from, :year_to, :price_from, :price_to, :user
+  attr_accessor :user
 
   def initialize(request, user)
     request_part(request)
