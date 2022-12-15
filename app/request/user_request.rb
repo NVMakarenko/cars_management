@@ -5,11 +5,7 @@ class UserRequest < Request
 
   def initialize(request, user)
     request_part(request)
-    @user = if user.nil?
-              nil
-            else
-              user.email
-            end
+    user_part(user)
   end
 
   def ==(other)
@@ -26,5 +22,13 @@ class UserRequest < Request
     @year_to = request.year_to
     @price_from = request.price_from
     @price_to = request.price_to
+  end
+
+  def user_part(user)
+    @user = if user.nil?
+              nil
+            else
+              user.email
+            end
   end
 end
