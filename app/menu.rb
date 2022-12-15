@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
 class Menu
-  SEARCH_CAR = 1
-  SHOW_LIST_CARS = 2
-  SHOW_HELP = 3
-  EXIT = 4
-  LOGIN_OR_SEARCHES = 5
-  SIGN_OR_LOGOUT = 6
+  include ExecuteMenu::Constants
 
   def call(current_user)
     @current_user = current_user
