@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require_relative 'helpers/menu_constants'
+
 class Menu
-  include ExecuteMenu::Constants
+  include MenuConstants
 
   def call(current_user)
     @current_user = current_user

@@ -1,17 +1,9 @@
 # frozen_string_literal: true
 
-class ExecuteMenu
-  module Constants
-    DB_CARS = 'db/db.yml'
+require_relative 'helpers/menu_constants'
 
-    SEARCH_CAR = 1
-    SHOW_LIST_CARS = 2
-    SHOW_HELP = 3
-    EXIT = 4
-    LOGIN_OR_SEARCHES = 5
-    SIGN_OR_LOGOUT = 6
-  end
-  include ExecuteMenu::Constants
+class ExecuteMenu
+  include MenuConstants
 
   def initialize(decision, current_user)
     @decision = decision
