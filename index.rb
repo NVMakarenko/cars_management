@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'autoload'
+require_relative './config/autoload'
 
 old_sync = $stdout.sync # cache old value
 $stdout.sync = true # set mode to true
