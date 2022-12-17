@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module MenuConstants
-  DB_CARS = 'db/db.yml'
+  DB_CARS = 'db/car.yml'
 
   SEARCH_CAR = 1
   SHOW_LIST_CARS = 2

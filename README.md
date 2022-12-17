@@ -4,5 +4,5 @@
 4. Type "ruby index.rb" and press Enter.
 
 Note:
-- to clean_up cars_db file type "rake db:clean"
+- to clean_up cars_db file type "rake db:clean_cars"
 - to add new item to cars_db file type "rake db:add_car[number of cars]". If you want to add one car just type "rake db:add_car"
