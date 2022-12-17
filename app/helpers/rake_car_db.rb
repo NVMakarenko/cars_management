@@ -15,7 +15,6 @@ namespace :db do
     amount_of_cars = args[:amount_of_cars].to_i
     amount_of_cars = 1 if amount_of_cars.zero?
     db_data = Database.new(SOURCE_FILE).load_file
-    db_data = [] if db_data.nil?
     amount_of_cars.times { db_data.push(new_car) }
     Database.new(SOURCE_FILE).save(db_data)
     puts "#{amount_of_cars} new car_s was added to DB Car"

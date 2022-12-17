@@ -58,10 +58,10 @@ DEPENDENCIES
   bundler-audit
   bundler-leak
   colorize (~> 0.8.1)
-  faker
+  faker (~> 3.0)
   i18n (~> 1.12)
   lefthook (~> 0.5.5)
-  rake
+  rake (~> 13.0, >= 13.0.6)
   rubocop
   rubocop-md
   rubocop-performance

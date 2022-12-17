@@ -6,7 +6,7 @@ class Database
   end
 
   def load_file
-    YAML.load_file(@db_adress)
+    YAML.load_file(@db_adress) || []
   end
 
   def load_file_with_permission(permission:, crypt: nil)
